@@ -12,7 +12,7 @@ This is a GraphQL, Node.js, TypeORM server application written in Typescript. It
 
 ## Introduction
 
-This very light application serves as a simple demo of several technologies and authentication best-practices.
+This very light application serves as a simple demo of several technologies and authentication good-practices.
 
 ## Features
 
@@ -53,7 +53,7 @@ Retrieval of the current authenticated user is made possible with the following 
 }
 ```
 
-The Node.js [express-session middleware](https://www.npmjs.com/package/express-session) was used for user authentication cookie storage.
+[JWT](https://jwt.io/) was used in the user authentication strategy.
 
 ### TyepScript
 
