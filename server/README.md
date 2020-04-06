@@ -12,7 +12,7 @@ This is a GraphQL, Node.js, TypeORM server application written in Typescript. It
 
 ## Introduction
 
-This very light application serves as a simple demo of several technologies and authentication best-practices.
+This very light application serves as a simple demo of several technologies and authentication good-practices.
 
 ## Features
 
@@ -53,9 +53,11 @@ Retrieval of the current authenticated user is made possible with the following 
 }
 ```
 
-The Node.js [express-session middleware](https://www.npmjs.com/package/express-session) was used for user authentication cookie storage.
+### JWT
 
-### TyepScript
+[JSON Web Tokens](https://jwt.io/) was used in the user authentication strategy.
+
+### TypeScript
 
 Why TypeScript? Because, use of types lends itself to using highly-productive development tools and practices; such as, static checking and code refactoring during JavaScript development. Additionally, there is great support for TypeScript in the development community.
 
