@@ -1,18 +1,35 @@
 import * as bcrypt from 'bcrypt';
+import { getConnection } from 'typeorm';
 import { User } from '../entity/User';
+import { createTokens } from '../tokens';
 
 export const resolvers = {
   Query: {
     me: async (_, __, { req }) => {
-      if (!req.session.userId) {
+      if (!req.userId) {
         return null;
       }
 
-      return await User.findOne(req.session.userId);
+      return await User.findOne(req.userId);
     },
   },
   Mutation: {
-    login: async (_, { email, password }, { req }) => {
+    invalidateTokens: async (_, __, { req, res }) => {
+      if (!req.userId) {
+        return false;
+      }
+
+      await getConnection()
+        .createQueryBuilder()
+        .update(User)
+        .set({ count: () => 'count + 1' })
+        .execute();
+
+      res.clearCookie('access-token');
+
+      return true;
+    },
+    login: async (_, { email, password }, { res }) => {
       const user = await User.findOne({ where: { email } });
       if (!user) {
         return null;
@@ -23,7 +40,10 @@ export const resolvers = {
         return null;
       }
 
-      req.session.userId = user.id;
+      const { accessToken, refreshToken } = createTokens(user);
+
+      res.cookie('refresh-token', refreshToken, { maxAge: 60 * 60 * 60 * 24 * 7 });
+      res.cookie('access-token', accessToken, { maxAge: 60 * 60 * 15 });
 
       return user;
     },
