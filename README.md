@@ -1,5 +1,3 @@
-<img src="https://github.com/andyfrith/graphql-user-auth/blob/master/system.png" alt="System" />
-
 # graphql-user-auth server
 
 This is a GraphQL, Node.js, TypeORM server application written in Typescript. It provides a GraphQL API which accesses user records stored in a local Postgres database.
