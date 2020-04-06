@@ -53,9 +53,11 @@ Retrieval of the current authenticated user is made possible with the following 
 }
 ```
 
-[JWT](https://jwt.io/) was used in the user authentication strategy.
+### JWT
 
-### TyepScript
+[JSON Web Tokens](https://jwt.io/) was used in the user authentication strategy.
+
+### TypeScript
 
 Why TypeScript? Because, use of types lends itself to using highly-productive development tools and practices; such as, static checking and code refactoring during JavaScript development. Additionally, there is great support for TypeScript in the development community.
 
