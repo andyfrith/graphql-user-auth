@@ -10,9 +10,17 @@ export type Scalars = {
   Float: number;
 };
 
+export type LoginResponse = {
+   __typename?: 'LoginResponse';
+  accessToken?: Maybe<Scalars['String']>;
+  user?: Maybe<User>;
+};
+
 export type Mutation = {
    __typename?: 'Mutation';
-  login?: Maybe<User>;
+  invalidateTokens: Scalars['Boolean'];
+  login?: Maybe<LoginResponse>;
+  logout: Scalars['Boolean'];
   register: Scalars['Boolean'];
 };
 
@@ -118,6 +126,7 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>,
   Mutation: ResolverTypeWrapper<{}>,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
+  LoginResponse: ResolverTypeWrapper<LoginResponse>,
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -128,10 +137,19 @@ export type ResolversParentTypes = {
   String: Scalars['String'],
   Mutation: {},
   Boolean: Scalars['Boolean'],
+  LoginResponse: LoginResponse,
+};
+
+export type LoginResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['LoginResponse'] = ResolversParentTypes['LoginResponse']> = {
+  accessToken?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>,
+  __isTypeOf?: isTypeOfResolverFn<ParentType>,
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  login?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'email' | 'password'>>,
+  invalidateTokens?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  login?: Resolver<Maybe<ResolversTypes['LoginResponse']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'email' | 'password'>>,
+  logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
   register?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationRegisterArgs, 'email' | 'password'>>,
 };
 
@@ -146,6 +164,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type Resolvers<ContextType = any> = {
+  LoginResponse?: LoginResponseResolvers<ContextType>,
   Mutation?: MutationResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
   User?: UserResolvers<ContextType>,
