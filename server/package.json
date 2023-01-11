@@ -77,7 +77,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "jest": "^25.1.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mysql": "^2.14.1",
     "object-hash": "^2.0.3",
     "pg": "^7.3.0",
